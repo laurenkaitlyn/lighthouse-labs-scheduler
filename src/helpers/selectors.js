@@ -15,3 +15,15 @@ export function getAppointmentsForDay(state, day) {
   return filteredAppointments;
 }
 
+//returns a new object containing the interview data when we pass it an object that contains the interviewer
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+  const filteredInterviews = {};
+
+  filteredInterviews.student = interview.student;
+  filteredInterviews.interviewer = state.interviewers[interview.interviewer];
+
+  return filteredInterviews;
+}

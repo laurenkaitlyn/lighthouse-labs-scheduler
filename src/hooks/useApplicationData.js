@@ -6,7 +6,7 @@ export default function useApplicationData(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
+    interviewers: {},
   });
 
   const setDay = (day) => setState({ ...state, day });
@@ -23,7 +23,7 @@ export default function useApplicationData(props) {
     ]).then((all) => {
       // console.log(all[0]);
       // console.log(all[1]);
-      console.log("-------interviewers",all[2]);
+      console.log("-------interviewers", all[2]);
       setState((prev) => ({
         ...prev,
         days: all[0].data,
@@ -33,36 +33,33 @@ export default function useApplicationData(props) {
     });
   }, []);
 
-  
-
   function bookInterview(id, interview) {
     console.log("--------bookInterview", id, interview);
 
     const appointment = {
       ...state.appointments[id],
-      interview: {...interview}
+      interview: { ...interview },
     };
 
     const appointments = {
       ...state.appointments,
-      [id]: appointment
+      [id]: appointment,
     };
 
     const url = `http://localhost:8001/api/appointments/${id}`;
-    
+
     let req = {
-      url, 
-      method: 'PUT',
-      data: appointment
-    }
-    return axios(req).then(res => {
-      console.log(res.data)
+      url,
+      method: "PUT",
+      data: appointment,
+    };
+    return axios(req).then((res) => {
+      console.log(res.data);
       setState({
         ...state,
-        appointments
-      })
-    })
-   
+        appointments,
+      });
+    });
   }
 
   function cancelInterview(id) {
@@ -70,33 +67,31 @@ export default function useApplicationData(props) {
 
     const appointment = {
       ...state.appointments[id],
-      interview: null
-    }
+      interview: null,
+    };
 
     const appointments = {
       ...state.appointments,
-     [id]: appointment
-    }
+      [id]: appointment,
+    };
 
     const url = `http://localhost:8001/api/appointments/${id}`;
 
     let req = {
       url,
-      method: 'DELETE',
-      data: appointment
-    }
-    return axios(req).then(res => {
-      console.log(res)
-      setState({...state, appointments})
+      method: "DELETE",
+      data: appointment,
+    };
+    return axios(req).then((res) => {
+      console.log(res);
+      setState({ ...state, appointments });
     });
-
   }
 
   return {
     state,
     setDay,
     bookInterview,
-    cancelInterview
-  }
-
+    cancelInterview,
+  };
 }

@@ -85,7 +85,7 @@ export default function Appointment(props) {
           onSave={save}
           interviewers={props.interviewers}
           student={props.interview.student}
-          interviewer={props.interview.interviewer}
+          interviewer={props.interview.interviewer.id}
         />
       )}
       {mode === ERROR_DELETE && (

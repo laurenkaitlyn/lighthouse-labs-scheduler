@@ -33,6 +33,27 @@ export default function useApplicationData(props) {
     });
   }, []);
 
+  //function to update spots availability and run when bookInterview is called or cancelInterview is called
+  function updateSpots(id, appointments) {
+    const days = [...state.days];
+    const dayIndex = days.findIndex((day) => day.appointments.includes(id));
+    const day = days[dayIndex];
+    const appointmentIds = day.appointments;
+    let spots = 0;
+    for (const appointmentId of appointmentIds) {
+      if (!appointments[appointmentId].interview) {
+        spots++;
+      }
+    }
+    day.spots = spots;
+    days[dayIndex] = day;
+    setState((prev) => ({
+      ...prev,
+      days,
+    }));
+  }
+
+
   function bookInterview(id, interview) {
     console.log("--------bookInterview", id, interview);
 
@@ -59,6 +80,7 @@ export default function useApplicationData(props) {
         ...state,
         appointments,
       });
+      updateSpots(id, appointments);
     });
   }
 
@@ -85,6 +107,7 @@ export default function useApplicationData(props) {
     return axios(req).then((res) => {
       console.log(res);
       setState({ ...state, appointments });
+      updateSpots(id, appointments);
     });
   }
 

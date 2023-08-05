@@ -27,15 +27,13 @@ export function getInterview(state, interview) {
 
 //takes a state object and a day string as arguments and returns an array of interviewers for the specified day from the state object.
 export function getInterviewersForDay(state, day) {
-
   const filteredDays = state.days.filter(d => d.name === day);
-  if(state.days.length===0 || filteredDays.length===0){
+  if(state.days.length === 0 || filteredDays.length === 0){
     return [];
   }
 
   //get interviwers for the days
   const interviewersFromDays = filteredDays[0].interviewers;
- 
   let filteredInterviewers = [];
 
   for(let interviewer of interviewersFromDays) {

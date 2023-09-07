@@ -4,7 +4,19 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 
 ## Setup
 
-Install dependencies with `npm install`.
+Dependencies:
+- axios
+- classnames
+- normalize.css
+- react
+- react-dom
+- react-hooks-testing-library
+- react-scripts
+
+Install dependencies with 
+```sh 
+npm install
+```
 This application requires an API server to run:
 
 https://github.com/lighthouse-labs/scheduler-api
